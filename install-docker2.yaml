@@ -28,11 +28,8 @@
         state: started
         enabled: yes
 
-    - name: Ensure Python pip packages are installed
-      pip:
-        name: "{{ packages }}"
-      vars:
-        packages:
-        - boto
-        - boto3
-        - docker-compose
+    - name: Install docker-compose
+      shell: "sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+      
+    - name: Fix Permissions
+      shell: "sudo chmod +x /usr/local/bin/docker-compose"
